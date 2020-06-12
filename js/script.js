@@ -7,7 +7,7 @@ Dopo che sono stati inseriti i 5 numeri,
 il software dice quanti e quali dei numeri da indovinare sono stati individuati
 */
 
-// Genero 5 numeri casuali
+// Genero 5 numeri casuali e li metto in un alert
 $(document).ready(
   function (){
     function numeriCasuali(numeri) {
