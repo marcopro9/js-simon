@@ -10,8 +10,10 @@ il software dice quanti e quali dei numeri da indovinare sono stati individuati
 // attendo il caricamento dell'HTML
 $(document).ready(
   function (){
-    //variabile per funzione numeri casuali 
+    //variabile per funzione numeri casuali
     var numeriCasuali = generaNumeriCasuali();
+    // variabile per far partire i 30secondi, le 5 domande e il calcolo del punteggio
+    var game = gameCountdown();
 
     // Genero 5 numeri casuali e li metto in un array
     function generaNumeriCasuali() {
@@ -27,10 +29,10 @@ $(document).ready(
     // le risposte dell'utente finiranno a sua volta in un array.
     function gameCountdown() {
       // faccio partire l'alert con il gioco e il countdown di 30 secondi,
+      // alla fine dei 30 secondi iniziano le 5 domande all'utente.
       var messaggio = alert('Ricordati questi numeri, al click su OK partira un countdown di 30 secondi e alla fine dovrai scrivere i numeri che avevi visto, sempre se ci riesci! ' + numeriCasuali);
       setTimeout(
-        // alla fine dei 30 secondi iniziano le 5 domande all'utente.
-        function (){
+      function (){
           var arrayNumeriUtente = [];
           for (var i = 0; i < 5; i++) {
             var numeriUtente= parseInt(prompt('adesso dovrai scrivere, uno alla volta, i numeri che ricordi dei 5 che hai visto. Scrivi un numero e clicca OK'));
