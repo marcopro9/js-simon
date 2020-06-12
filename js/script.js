@@ -10,42 +10,47 @@ il software dice quanti e quali dei numeri da indovinare sono stati individuati
 // attendo il caricamento dell'HTML
 $(document).ready(
   function (){
+    //variabili
+    var numeriCasuali = generaNumeriCasuali();
     var game = gameCountdown();
-    // Genero 5 numeri casuali
-    function numeriCasuali(numeri) {
+    console.log(numeriCasuali);
+    
+
+    // Genero 5 numeri casuali e li metto in un array
+    function generaNumeriCasuali() {
       var arrayNumeriCasuali = [];
       for (var i = 0; i < 5 ; i++) {
         var numeri= Math.floor(Math.random() * 100) + 1;
         arrayNumeriCasuali.push(numeri);
+        arrayNumeriCasuali.sort();
       }
-      console.log(arrayNumeriCasuali);
       return arrayNumeriCasuali;
     }
-    // e li metto in un alert.
-    // una volta che l'utente clicca ok faccio partire un timer di 30 secondi
+
+    // faccio partire l'alert con il gioco e il countdown di 30 secondi,
+    // alla fine del quale iniziano le domande all'utente.
+    // le risposte dell'utente finiranno a sua volta in un array.
     function gameCountdown() {
-      var messaggio = alert('Ricordati questi numeri, al click su OK partira un countdown di 30 secondi e alla fine dovrai scrivere i numeri che avevi visto, sempre se ci riesci! ' + numeriCasuali());
+      var messaggio = alert('Ricordati questi numeri, al click su OK partira un countdown di 30 secondi e alla fine dovrai scrivere i numeri che avevi visto, sempre se ci riesci! ' + numeriCasuali);
       setTimeout(
-        function () {
+        function (){
           var arrayNumeriUtente = [];
           for (var i = 0; i < 5; i++) {
             var numeriUtente= parseInt(prompt('adesso dovrai scrivere, uno alla volta, i numeri che ricordi dei 5 che hai visto. Scrivi un numero e clicca OK'));
-            arrayNumeriUtente.push(numeriUtente);
+            if (numeriCasuali.includes(numeriUtente))
+              arrayNumeriUtente.push(numeriUtente);
+              arrayNumeriUtente.sort();
+            }
+          var numeriIndovinati = arrayNumeriUtente.length;
+          if (numeriIndovinati === 0){
+            console.log('non ne hai indovinato neanche uno. Punteggio: ' + numeriIndovinati);
+          } else if (numeriIndovinati === 5){
+              console.log('Grande hai vinto! i tuoi numeri erano: ' + arrayNumeriUtente + ' ed i numeri casuali erano: ' + numeriCasuali + '. Punteggio: ' + numeriIndovinati);
+            } else {
+                console.log('non è andata bene, i numeri indovinati sono: ' + arrayNumeriUtente + ' ed i numeri casuali erano: ' + numeriCasuali + '. Punteggio: ' + numeriIndovinati);
+              }
           }
-          console.log(arrayNumeriUtente);
-          return arrayNumeriUtente;
-        }
-      , 3000);
+      , 2000);
     }
-    // alla fine dei 30 secondi partono i prompt dell'utente
-    // function () {
-    //   var arrayNumeriUtente = [];
-    //   for (var i = 0; i < 5; i++) {
-    //     var numeriUtente= parseInt(prompt('adesso dovrai scrivere, uno alla volta, i numeri che ricordi dei 5 che hai visto. Scrivi un numero e clicca OK'));
-    //     arrayNumeriUtente.push(numeriUtente);
-    //   }
-    //   console.log(arrayNumeriUtente);
-    //   return arrayNumeriUtente;
-    // }
   }
 );
