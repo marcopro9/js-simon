@@ -46,7 +46,7 @@ $(document).ready(
           var numeriIndovinati = arrayNumeriUtente.length;
           // in base al risultato ottenuto dall'utente stampa un log con il risultato
           if (numeriIndovinati === 0){
-            console.log('non ne hai indovinato neanche uno. Punteggio: ' + numeriIndovinati);
+            console.log('non ne hai indovinato neanche uno. I numeri casuali erano:'  + numeriCasuali + 'Punteggio: ' + numeriIndovinati);
           } else if (numeriIndovinati === 5){
               console.log('Grande hai vinto! i tuoi numeri erano: ' + arrayNumeriUtente + ' ed i numeri casuali erano: ' + numeriCasuali + '. Punteggio: ' + numeriIndovinati);
             } else {
