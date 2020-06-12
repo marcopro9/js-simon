@@ -10,11 +10,8 @@ il software dice quanti e quali dei numeri da indovinare sono stati individuati
 // attendo il caricamento dell'HTML
 $(document).ready(
   function (){
-    //variabili
+    //variabile per funzione numeri casuali 
     var numeriCasuali = generaNumeriCasuali();
-    var game = gameCountdown();
-    console.log(numeriCasuali);
-    
 
     // Genero 5 numeri casuali e li metto in un array
     function generaNumeriCasuali() {
@@ -27,21 +24,25 @@ $(document).ready(
       return arrayNumeriCasuali;
     }
 
-    // faccio partire l'alert con il gioco e il countdown di 30 secondi,
-    // alla fine del quale iniziano le domande all'utente.
     // le risposte dell'utente finiranno a sua volta in un array.
     function gameCountdown() {
+      // faccio partire l'alert con il gioco e il countdown di 30 secondi,
       var messaggio = alert('Ricordati questi numeri, al click su OK partira un countdown di 30 secondi e alla fine dovrai scrivere i numeri che avevi visto, sempre se ci riesci! ' + numeriCasuali);
       setTimeout(
+        // alla fine dei 30 secondi iniziano le 5 domande all'utente.
         function (){
           var arrayNumeriUtente = [];
           for (var i = 0; i < 5; i++) {
             var numeriUtente= parseInt(prompt('adesso dovrai scrivere, uno alla volta, i numeri che ricordi dei 5 che hai visto. Scrivi un numero e clicca OK'));
+            //  se i numeri scritti dall'utente corrispondono a quelli nell'array dei numeri numeriCasuali
+            // il ciclo li inserisce nell'arrayNumeriUtente cosi da contarli
             if (numeriCasuali.includes(numeriUtente))
               arrayNumeriUtente.push(numeriUtente);
               arrayNumeriUtente.sort();
             }
+          //  i numeri indovinati corrispondono cosi alla lunghezza dell'array utente
           var numeriIndovinati = arrayNumeriUtente.length;
+          // in base al risultato ottenuto dall'utente stampa un log con il risultato
           if (numeriIndovinati === 0){
             console.log('non ne hai indovinato neanche uno. Punteggio: ' + numeriIndovinati);
           } else if (numeriIndovinati === 5){
@@ -50,7 +51,7 @@ $(document).ready(
                 console.log('non è andata bene, i numeri indovinati sono: ' + arrayNumeriUtente + ' ed i numeri casuali erano: ' + numeriCasuali + '. Punteggio: ' + numeriIndovinati);
               }
           }
-      , 2000);
+      , 30000);
     }
   }
 );
